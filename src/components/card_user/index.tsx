@@ -10,16 +10,32 @@ import {
   SectionFeature,
 } from './styles';
 
-export function CardUser() {
+type CardUserProps = {
+  name: string;
+  email: string;
+  country: string;
+  genre: string;
+  born: string;
+  img: string;
+};
+
+export function CardUser({
+  name,
+  img,
+  email,
+  country,
+  genre,
+  born,
+}: CardUserProps): JSX.Element {
   return (
     <Container>
-      <Photo />
-      <Title>Nome do Produto #1</Title>
-      <Description>Descrição do produto #1</Description>
+      <Photo src={img} alt="image profile" />
+      <Title>{name}</Title>
+      <Description>{email}</Description>
       <SectionFeature>
-        <Feature>Feature</Feature>
-        <Feature>Feature</Feature>
-        <Feature>Feature</Feature>
+        <Feature>{country}</Feature>
+        <Feature>{genre}</Feature>
+        <Feature>{born}</Feature>
       </SectionFeature>
       <Button>
         <TextButton>Ver solução</TextButton>

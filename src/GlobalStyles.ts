@@ -6,6 +6,7 @@ export default createGlobalStyle`
       margin: 0px;
       outline: 0px;
       overflow-x: hidden;
+      overflow-y: visible;
       box-sizing: border-box;
        font-family:'Barlow',sans-serif;  
     

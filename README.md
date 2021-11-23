@@ -1,13 +1,11 @@
 ## Loja vtex jussy
-Propsta para resolver o caso uso proposto pela Jussy
+Solução  para resolver o caso uso proposto pela Jussy
 
 
 
 ##  Motivação
 Consumir api [random_user](https://randomuser.me/documentation), aplicando filtros por país .</br>
-Caso de uso: Aplicar boas praticas e ser fiel as interfaces do [figma](https://www.figma.com/file/O9AEeYB6ZWyMTZzMZhvjaY/loja-vtex-jussi)
-
-
+Caso de uso: Aplicar boas práticas e ser fiel às ‘interfaces’ do [figma](https://www.figma.com/file/O9AEeYB6ZWyMTZzMZhvjaY/loja-vtex-jussi)
 
 
 ## Feature

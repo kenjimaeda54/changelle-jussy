@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import logo from '../../assets/logo_header.svg';
 import { CardProduct } from '../../components/card_product';
 import { CardUser } from '../../components/card_user';
+import { api } from '../../service';
+import { getInitialsCountry, Results } from '../../utils';
 import Social from '../../assets/social.svg';
 import WpCompany from '../../assets/wppcompany.svg';
 import Jussi from '../../assets/jussi.svg';
@@ -22,6 +24,7 @@ import {
   Input,
   Cart,
   Search,
+  ButtonSearch,
   Section,
   SectionDescription,
   TitleSection,
@@ -61,6 +64,48 @@ import {
 } from './styles';
 
 export default function Home(): JSX.Element {
+  const [isLoading, setIsLoading] = useState(true);
+  const [user, setUser] = useState<Results[]>([]);
+  const [mounted, setMounted] = useState(false);
+  const [userInput, setUserInput] = useState('');
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await api.get('/?results=4');
+        setUser(response.data.results);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    if (!mounted) {
+      fetchData();
+    }
+    return () => {
+      setMounted(true);
+    };
+  });
+
+  async function handleSearch() {
+    setIsLoading(true);
+    if (getInitialsCountry(userInput).length < 1) {
+      return alert('Insira pais valido.');
+    }
+    try {
+      const response = await api.get(
+        `/?results=4&nat=${getInitialsCountry(userInput)}`,
+      );
+      setUser(response.data.results);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
   return (
     <Container>
       <div>
@@ -72,8 +117,20 @@ export default function Home(): JSX.Element {
           </Left>
           <Right>
             <div>
-              <Input placeholder="Buscar" />
-              <Search />
+              <Input
+                type="text"
+                autoCorrect="on"
+                value={userInput}
+                onChange={(e) => setUserInput(e.target.value)}
+                placeholder="Buscar por pais"
+              />
+              <ButtonSearch
+                canTouch={userInput.length > 3}
+                disabled={userInput.length < 3}
+                onClick={handleSearch}
+              >
+                <Search />
+              </ButtonSearch>
             </div>
             <TitleLeft>Login</TitleLeft>
             <Cart />
@@ -114,38 +171,14 @@ export default function Home(): JSX.Element {
           <div>
             <TitleArticle>Nossos colaboradores</TitleArticle>
             <ContainerCardUser>
-              <CardUser
-                name="José da Silva"
-                img="https://github.com/kenjimaeda54.png"
-                email="kenji@gmail.com"
-                country="Brasil"
-                genre="Male"
-                born="08/0689"
-              />
-              <CardUser
-                name="José da Silva"
-                img="https://github.com/kenjimaeda54.png"
-                email="kenji@gmail.com"
-                country="Brasil"
-                genre="Male"
-                born="08/0689"
-              />
-              <CardUser
-                name="José da Silva"
-                img="https://github.com/kenjimaeda54.png"
-                email="kenji@gmail.com"
-                country="Brasil"
-                genre="Male"
-                born="08/0689"
-              />
-              <CardUser
-                name="José da Silva"
-                img="https://github.com/kenjimaeda54.png"
-                email="kenji@gmail.com"
-                country="Brasil"
-                genre="Male"
-                born="08/0689"
-              />
+              {user.map((item) => (
+                <CardUser
+                  key={item.login.uuid}
+                  results={item}
+                  isLoading={isLoading}
+                />
+              ))}
+              ;
             </ContainerCardUser>
             <ArticleFooter>
               <WrapArticleFooter>

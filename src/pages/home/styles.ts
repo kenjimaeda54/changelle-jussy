@@ -2,6 +2,10 @@ import styled from 'styled-components';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
 import { BsSearch } from 'react-icons/bs';
 
+type ButtonSearchProps = {
+  canTouch: boolean;
+};
+
 export const Container = styled.div`
   display: flex;
   height: 100%;
@@ -204,6 +208,15 @@ export const ContainerCardUser = styled.div`
   gap: 20px;
   align-items: center;
   margin-top: 24px;
+`;
+
+export const ButtonSearch = styled.button<ButtonSearchProps>`
+  background-color: transparent;
+  border: none;
+  cursor: ${({ canTouch }) => (canTouch ? 'pointer' : 'no-drop')};
+  &:hover {
+    opacity: 0.5;
+  }
 `;
 
 export const ArticleFooter = styled.div`

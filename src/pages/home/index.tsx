@@ -224,8 +224,8 @@ export default function Home(): JSX.Element {
           </WrapFooterInput>
         </Footer>
         <ContainerSocial>
-          <img src={WpCompany} alt="image footer wp company" />
-          <img src={Social} alt="image footer social" />
+          <img src={WpCompany} alt="footer wp company" />
+          <img src={Social} alt="footer social" />
         </ContainerSocial>
       </div>
     </Container>

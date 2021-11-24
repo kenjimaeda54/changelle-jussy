@@ -162,10 +162,10 @@ export default function Home(): JSX.Element {
         <SubSection>
           <TitleSuSection>Nossas principais lojas VTEX</TitleSuSection>
           <Arrow> {'-->'} </Arrow>
-          <img src={Brastemp} />
-          <img src={Consul2} />
-          <img src={Consul} />
-          <img src={Thebar} />
+          <img src={Brastemp} alt="logo brastemp" />
+          <img src={Consul2}  alt="logo consul" />
+          <img src={Consul}  alt="logo consul" />
+          <img src={Thebar}  alt="logo thebar" />
         </SubSection>
         <Article>
           <div>
